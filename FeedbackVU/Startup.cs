@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FeedbackVU.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace FeedbackVU
 {
@@ -29,6 +30,9 @@ namespace FeedbackVU
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+
+            services.AddDbContext<FeedbackContext>(options =>
+                 options.UseSqlServer(Configuration.GetConnectionString("Feedback")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
